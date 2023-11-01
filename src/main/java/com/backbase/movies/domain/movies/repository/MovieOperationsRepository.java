@@ -1,6 +1,4 @@
-package com.backbase.movies.domain.repository;
-
-import com.backbase.movies.domain.Nominee;
+package com.backbase.movies.domain.movies.repository;
 
 interface MovieOperationsRepository {
     void addNominee(String movieId, Nominee nominee);

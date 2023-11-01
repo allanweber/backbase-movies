@@ -1,6 +1,8 @@
-package com.backbase.movies.domain;
+package com.backbase.movies.domain.movies;
 
-import com.backbase.movies.domain.repository.MovieRepository;
+import com.backbase.movies.domain.movies.repository.Movie;
+import com.backbase.movies.domain.movies.repository.MovieRepository;
+import com.backbase.movies.domain.movies.repository.Nominee;
 import org.springframework.stereotype.Service;
 
 @Service

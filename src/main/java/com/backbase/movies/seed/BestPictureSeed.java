@@ -1,9 +1,9 @@
 package com.backbase.movies.seed;
 
-import com.backbase.movies.domain.Category;
-import com.backbase.movies.domain.Movie;
-import com.backbase.movies.domain.MovieService;
-import com.backbase.movies.domain.Nominee;
+import com.backbase.movies.domain.movies.repository.Category;
+import com.backbase.movies.domain.movies.repository.Movie;
+import com.backbase.movies.domain.movies.MovieService;
+import com.backbase.movies.domain.movies.repository.Nominee;
 import org.springframework.stereotype.Component;
 
 import java.util.List;

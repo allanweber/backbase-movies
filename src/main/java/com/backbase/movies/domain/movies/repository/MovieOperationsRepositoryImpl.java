@@ -1,7 +1,5 @@
-package com.backbase.movies.domain.repository;
+package com.backbase.movies.domain.movies.repository;
 
-import com.backbase.movies.domain.Movie;
-import com.backbase.movies.domain.Nominee;
 import org.springframework.data.mongodb.core.MongoOperations;
 import org.springframework.data.mongodb.core.query.Criteria;
 import org.springframework.data.mongodb.core.query.Query;

@@ -1,6 +1,6 @@
 package com.backbase.movies.seed;
 
-import com.backbase.movies.domain.Category;
+import com.backbase.movies.domain.movies.repository.Category;
 import org.apache.commons.csv.CSVFormat;
 import org.apache.commons.csv.CSVParser;
 import org.springframework.stereotype.Component;
@@ -22,7 +22,6 @@ public class SeedCsv {
 
     public void seed() {
 
-//        try (InputStream is = this.getClass().getClassLoader().getResourceAsStream("data/academy_fake.csv")) {
         try (InputStream is = this.getClass().getClassLoader().getResourceAsStream("data/academy_awards.csv")) {
             if (is == null) throw new RuntimeException("Cannot find resource file /data/academy_awards.csv");
 

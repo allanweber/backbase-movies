@@ -17,6 +17,13 @@ I skip reading data from award that are not liked to specific movies
     <version>1.10.0</version>
 </dependency>
 
+MONGO
+
+<dependency>
+            <groupId>org.hibernate.validator</groupId>
+            <artifactId>hibernate-validator</artifactId>
+            <version>8.0.0.Final</version>
+        </dependency>
 
 java -jar .\target\Movies-API-0.0.1.jar
 java -jar -DSEED_ENABLED=true .\target\Movies-API-0.0.1.jar

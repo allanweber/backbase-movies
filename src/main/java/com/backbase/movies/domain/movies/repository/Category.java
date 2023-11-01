@@ -1,4 +1,4 @@
-package com.backbase.movies.domain;
+package com.backbase.movies.domain.movies.repository;
 
 public enum Category {
     BEST_PICTURE("Best Picture"),

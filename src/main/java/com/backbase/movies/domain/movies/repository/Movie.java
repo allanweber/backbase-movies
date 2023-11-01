@@ -1,4 +1,4 @@
-package com.backbase.movies.domain;
+package com.backbase.movies.domain.movies.repository;
 
 import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.mapping.Document;
@@ -15,7 +15,7 @@ public class Movie {
 
     private int year;
 
-    private MovieRating rating;
+    private MovieRate rate;
 
     private List<Nominee> nominees;
 
@@ -31,6 +31,7 @@ public class Movie {
     public Movie(String title, int year) {
         this.title = title;
         this.year = year;
+        this.rate = new MovieRate();
     }
 
     public String getId() {
@@ -45,11 +46,7 @@ public class Movie {
         return year;
     }
 
-    public MovieRating getRating() {
-        return rating;
-    }
-
-    public List<Nominee> getNominees() {
-        return nominees;
+    public MovieRate getRate() {
+        return rate;
     }
 }
