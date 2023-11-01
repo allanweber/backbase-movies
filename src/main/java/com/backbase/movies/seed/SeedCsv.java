@@ -22,6 +22,7 @@ public class SeedCsv {
 
     public void seed() {
 
+//        try (InputStream is = this.getClass().getClassLoader().getResourceAsStream("data/academy_fake.csv")) {
         try (InputStream is = this.getClass().getClassLoader().getResourceAsStream("data/academy_awards.csv")) {
             if (is == null) throw new RuntimeException("Cannot find resource file /data/academy_awards.csv");
 
