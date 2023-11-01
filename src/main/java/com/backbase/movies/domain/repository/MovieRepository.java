@@ -7,4 +7,5 @@ import java.util.Optional;
 
 public interface MovieRepository extends CrudRepository<Movie, String>, MovieOperationsRepository {
     Optional<Movie> getByTitleAndYear(String title, int year);
+
 }

@@ -1,5 +1,6 @@
 package com.backbase.movies.api;
 
+import com.backbase.movies.domain.BestPictureService;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
@@ -9,15 +10,26 @@ import static org.springframework.http.ResponseEntity.ok;
 @RestController
 public class BestPictureController {
 
+    private final BestPictureService bestPictureService;
+
+    public BestPictureController(BestPictureService bestPictureService) {
+        this.bestPictureService = bestPictureService;
+    }
+
     @GetMapping("/won/{movie-id}")
     ResponseEntity<WonResponse> won(@PathVariable(name = "movie-id") String movieId) {
-        return ok(new WonResponse(true));
+        boolean bestPicture = bestPictureService.wonBestPicture(movieId);
+        return ok(new WonResponse(bestPicture));
     }
 
     @GetMapping("/won")
     ResponseEntity<WonResponse> wonByTitle(@RequestParam(value = "title", required = false) String title) {
-        return ok(new WonResponse(true));
+        boolean bestPicture = bestPictureService.wonBestPictureByMovieTitle(title);
+        return ok(new WonResponse(bestPicture));
     }
 
-    public record WonResponse(boolean won) {};
+    public record WonResponse(boolean won) {
+    }
+
+    ;
 }
