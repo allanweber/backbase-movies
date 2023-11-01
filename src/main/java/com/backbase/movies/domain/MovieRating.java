@@ -1,4 +1,4 @@
-package com.backbase.movies.model;
+package com.backbase.movies.domain;
 
 public class MovieRating {
     private int ratings;

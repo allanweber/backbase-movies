@@ -1,9 +1,9 @@
-package com.backbase.movies.model;
+package com.backbase.movies.domain;
 
 import org.springframework.data.repository.CrudRepository;
 
 import java.util.Optional;
 
-public interface MovieRepository extends CrudRepository<Movie, Long> {
+public interface MovieRepository extends CrudRepository<Movie, String> {
     Optional<Movie> getByTitleAndYear(String title, int year);
 }

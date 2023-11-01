@@ -1,4 +1,4 @@
-package com.backbase.movies.model;
+package com.backbase.movies.domain;
 
 import org.springframework.data.mongodb.core.MongoOperations;
 import org.springframework.data.mongodb.core.query.Criteria;
@@ -23,10 +23,9 @@ public class MovieService {
                 .orElseGet(() -> movieRepository.save(movie));
     }
 
-    public void setNominee(String movieId, Nominee nominee) {
+    public void addNominee(String movieId, Nominee nominee) {
         Query query = new Query(Criteria.where("_id").is(movieId));
         Update update = new Update().addToSet("nominees", nominee);
-
         mongoOperations.updateFirst(query, update, Movie.class);
     }
 }

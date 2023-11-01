@@ -1,4 +1,4 @@
-package com.backbase.movies.model;
+package com.backbase.movies.domain;
 
 import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.mapping.Document;

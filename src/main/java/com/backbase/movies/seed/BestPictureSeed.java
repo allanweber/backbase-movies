@@ -1,9 +1,9 @@
 package com.backbase.movies.seed;
 
-import com.backbase.movies.model.Category;
-import com.backbase.movies.model.Movie;
-import com.backbase.movies.model.MovieService;
-import com.backbase.movies.model.Nominee;
+import com.backbase.movies.domain.Category;
+import com.backbase.movies.domain.Movie;
+import com.backbase.movies.domain.MovieService;
+import com.backbase.movies.domain.Nominee;
 import org.springframework.stereotype.Component;
 
 import java.util.List;
@@ -25,7 +25,7 @@ public class BestPictureSeed extends SeedParser {
             int year = getYear();
             String movieTitle = getMovieTitle();
             Movie movie = movieService.getOrCreateMovie(new Movie(movieTitle, year));
-            movieService.setNominee(movie.getId(), new Nominee(Category.BEST_PICTURE, getAdditionalInfo(), won()));
+            movieService.addNominee(movie.getId(), new Nominee(Category.BEST_PICTURE, getAdditionalInfo(), won()));
         }
     }
 
