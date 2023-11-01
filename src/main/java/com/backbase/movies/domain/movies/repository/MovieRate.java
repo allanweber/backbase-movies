@@ -2,21 +2,27 @@ package com.backbase.movies.domain.movies.repository;
 
 import com.backbase.movies.domain.movies.Helper;
 
+import java.util.ArrayList;
+import java.util.List;
+
 public class MovieRate {
-    private int ratings = 0;
+    private List<Double> ratings;
 
-    private double rate = 0.0;
+    private double currentRate = 0.0;
 
-    public void rate(double rate) {
-        this.ratings++;
-        this.rate = Helper.doublePrecision((this.rate + rate) / this.ratings);
+    public void rate(double rating) {
+        if (ratings == null) {
+            ratings = new ArrayList<>();
+        }
+        ratings.add(rating);
+        currentRate = Helper.doublePrecision(ratings.stream().mapToDouble(Double::doubleValue).average().orElse(0.0));
     }
 
-    public int getRatings() {
+    public List<Double> getRatings() {
         return ratings;
     }
 
-    public double getRate() {
-        return rate;
+    public double getCurrentRate() {
+        return currentRate;
     }
 }

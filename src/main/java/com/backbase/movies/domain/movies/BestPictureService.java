@@ -16,8 +16,4 @@ public class BestPictureService {
     public boolean wonBestPicture(String movieId) {
         return movieRepository.wonBestPicture(movieId);
     }
-
-    public boolean wonBestPictureByMovieTitle(String movieTitle) {
-        return movieRepository.wonBestPictureByMovieTitle(movieTitle);
-    }
 }

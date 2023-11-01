@@ -24,6 +24,7 @@ public class RatingService {
                 .orElseGet(() -> getFromApi(movieTitle));
 
         movie.getRate().rate(rate);
+
         return movieRepository.save(movie);
     }
 
