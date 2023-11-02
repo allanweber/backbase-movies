@@ -44,7 +44,7 @@ public class AuthenticationFilter extends GenericFilterBean {
         public static Optional<Authentication> getAuthentication(HttpServletRequest request) {
             Optional<Authentication> authentication = Optional.empty();
             String apiKey = request.getHeader(AUTH_TOKEN_HEADER_NAME);
-            if (VALID_TOKENS.contains(apiKey)) {
+            if (apiKey != null && VALID_TOKENS.contains(apiKey)) {
                 authentication = of(new ApiKeyAuthentication(apiKey, AuthorityUtils.NO_AUTHORITIES));
             }
             return authentication;

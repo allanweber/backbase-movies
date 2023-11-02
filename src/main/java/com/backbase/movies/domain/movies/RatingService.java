@@ -8,6 +8,7 @@ import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
 import org.springframework.web.client.HttpClientErrorException;
 
+import java.util.List;
 import java.util.Optional;
 
 @Service
@@ -33,6 +34,12 @@ public class RatingService {
 
         movie.getRate().rate(rate);
         return movieRepository.save(movie);
+    }
+
+    public List<Movie> topRated(int limit) {
+        List<Movie> movies = movieRepository.topRated(limit);
+//        movies.sort((m1, m2) -> Double.compare(m2.getBoxOffice(), m1.getBoxOffice()));
+        return movies;
     }
 
     private double retrieveBoxOffice(String movieTitle) {

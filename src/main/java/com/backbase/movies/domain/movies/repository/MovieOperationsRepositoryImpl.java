@@ -1,9 +1,13 @@
 package com.backbase.movies.domain.movies.repository;
 
+import org.springframework.data.domain.Sort;
 import org.springframework.data.mongodb.core.MongoOperations;
+import org.springframework.data.mongodb.core.aggregation.Aggregation;
 import org.springframework.data.mongodb.core.query.Criteria;
 import org.springframework.data.mongodb.core.query.Query;
 import org.springframework.data.mongodb.core.query.Update;
+
+import java.util.List;
 
 class MovieOperationsRepositoryImpl implements MovieOperationsRepository {
 
@@ -25,5 +29,15 @@ class MovieOperationsRepositoryImpl implements MovieOperationsRepository {
         Query query = new Query(Criteria.where("title").is(movieTitle).and("nominees.category").is("BEST_PICTURE").and("nominees.won").is(true));
         Movie one = mongoOperations.findOne(query, Movie.class);
         return one != null;
+    }
+
+    @Override
+    public List<Movie> topRated(int limit) {
+        Aggregation aggregation = Aggregation.newAggregation(
+                Aggregation.sort(Sort.Direction.DESC, "rate.currentRate"),
+                Aggregation.limit(limit)
+        );
+        List<Movie> mappedResults = mongoOperations.aggregate(aggregation, Movie.class, Movie.class).getMappedResults();
+        return mappedResults;
     }
 }
