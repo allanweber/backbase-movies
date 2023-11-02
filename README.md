@@ -3,6 +3,8 @@
 docker run -p 27017:27017 --name movies -d mongo
 ```
 
+OMDB key 3307cf63
+
 Notes
 I did not use a postgres enum, because we are now only working with Best Pictures, if we need to add a new enum
 value we need to drop the existing one and create a anew one, what is quite a fuzz, so I decided to use a varchar, and

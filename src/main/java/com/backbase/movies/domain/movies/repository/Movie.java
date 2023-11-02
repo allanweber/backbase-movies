@@ -19,7 +19,10 @@ public class Movie {
 
     private List<Nominee> nominees;
 
+    private double boxOffice;
+
     public Movie() {
+        this.rate = new MovieRate();
     }
 
     public Movie(String id, String title, int year) {
@@ -29,9 +32,17 @@ public class Movie {
     }
 
     public Movie(String title, int year) {
+        this();
         this.title = title;
         this.year = year;
-        this.rate = new MovieRate();
+    }
+
+
+    public Movie(String title, int year, double boxOffice) {
+        this();
+        this.title = title;
+        this.year = year;
+        this.boxOffice = boxOffice;
     }
 
     public String getId() {
@@ -48,5 +59,13 @@ public class Movie {
 
     public MovieRate getRate() {
         return rate;
+    }
+
+    public double getBoxOffice() {
+        return boxOffice;
+    }
+
+    public void setBoxOffice(double boxOffice) {
+        this.boxOffice = boxOffice;
     }
 }

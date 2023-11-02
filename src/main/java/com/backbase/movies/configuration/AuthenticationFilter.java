@@ -14,6 +14,7 @@ import org.springframework.web.filter.GenericFilterBean;
 
 import java.io.IOException;
 import java.util.Collection;
+import java.util.List;
 import java.util.Optional;
 
 import static java.util.Optional.of;
@@ -36,12 +37,14 @@ public class AuthenticationFilter extends GenericFilterBean {
     public static class AuthenticationService {
 
         private static final String AUTH_TOKEN_HEADER_NAME = "X-API-KEY";
-        private static final String AUTH_TOKEN = "test-api-key";
+
+        // TODO: Mock valid tokens, since the token generation is not implemented yet
+        private static final List<String> VALID_TOKENS = List.of("3307cf63", "a0c16fd2");
 
         public static Optional<Authentication> getAuthentication(HttpServletRequest request) {
             Optional<Authentication> authentication = Optional.empty();
             String apiKey = request.getHeader(AUTH_TOKEN_HEADER_NAME);
-            if (AUTH_TOKEN.equals(apiKey)) {
+            if (VALID_TOKENS.contains(apiKey)) {
                 authentication = of(new ApiKeyAuthentication(apiKey, AuthorityUtils.NO_AUTHORITIES));
             }
             return authentication;

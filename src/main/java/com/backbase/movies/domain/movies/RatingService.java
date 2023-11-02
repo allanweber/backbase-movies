@@ -1,11 +1,14 @@
 package com.backbase.movies.domain.movies;
 
-import com.backbase.movies.domain.imdb.MovieCollectionApi;
+import com.backbase.movies.domain.movieapi.MovieCollectionApi;
+import com.backbase.movies.domain.movieapi.MovieEntry;
 import com.backbase.movies.domain.movies.repository.Movie;
 import com.backbase.movies.domain.movies.repository.MovieRepository;
 import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
 import org.springframework.web.client.HttpClientErrorException;
+
+import java.util.Optional;
 
 @Service
 public class RatingService {
@@ -21,17 +24,30 @@ public class RatingService {
 
     public Movie rate(String movieTitle, double rate) {
         Movie movie = movieRepository.getByTitle(movieTitle)
-                .orElseGet(() -> getFromApi(movieTitle));
+                .orElseGet(() -> newMovieFromCollection(movieTitle));
+
+        if (movie.getBoxOffice() == 0) {
+            double boxOffice = retrieveBoxOffice(movieTitle);
+            movie.setBoxOffice(boxOffice);
+        }
 
         movie.getRate().rate(rate);
-
         return movieRepository.save(movie);
     }
 
-    private Movie getFromApi(String movieTitle) {
-        return movieCollectionApi.searchMovie(movieTitle)
-                .map(entry -> new Movie(entry.title(), entry.year()))
-                .map(movieRepository::save)
+    private double retrieveBoxOffice(String movieTitle) {
+        return searchInMovieCollection(movieTitle)
+                .map(MovieEntry::getBoxOffice)
+                .orElse(0.0);
+    }
+
+    private Movie newMovieFromCollection(String movieTitle) {
+        return searchInMovieCollection(movieTitle)
+                .map(entry -> new Movie(entry.getTitle(), entry.getYear(), entry.getBoxOffice()))
                 .orElseThrow(() -> new HttpClientErrorException(HttpStatus.BAD_REQUEST, String.format("Movie %s not found", movieTitle)));
+    }
+
+    private Optional<MovieEntry> searchInMovieCollection(String movieTitle) {
+        return movieCollectionApi.searchMovie(movieTitle);
     }
 }

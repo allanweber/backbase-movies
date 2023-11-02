@@ -1,4 +1,4 @@
-package com.backbase.movies.domain.imdb;
+package com.backbase.movies.domain.movieapi;
 
 import org.springframework.stereotype.Service;
 
