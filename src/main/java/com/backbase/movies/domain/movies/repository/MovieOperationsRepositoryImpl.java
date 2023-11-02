@@ -35,9 +35,9 @@ class MovieOperationsRepositoryImpl implements MovieOperationsRepository {
     public List<Movie> topRated(int limit) {
         Aggregation aggregation = Aggregation.newAggregation(
                 Aggregation.sort(Sort.Direction.DESC, "rate.currentRate"),
-                Aggregation.limit(limit)
+                Aggregation.limit(limit),
+                Aggregation.sort(Sort.Direction.DESC, "boxOffice")
         );
-        List<Movie> mappedResults = mongoOperations.aggregate(aggregation, Movie.class, Movie.class).getMappedResults();
-        return mappedResults;
+        return mongoOperations.aggregate(aggregation, Movie.class, Movie.class).getMappedResults();
     }
 }

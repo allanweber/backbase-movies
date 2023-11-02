@@ -5,10 +5,12 @@ import com.backbase.movies.domain.movies.RatingService;
 import com.backbase.movies.domain.movies.repository.Movie;
 import jakarta.validation.Valid;
 import jakarta.validation.constraints.Positive;
+import org.springframework.format.annotation.NumberFormat;
 import org.springframework.http.ResponseEntity;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 
+import java.math.BigDecimal;
 import java.util.List;
 
 import static org.springframework.http.ResponseEntity.ok;
@@ -42,6 +44,6 @@ public class RatingController {
     private record RateResponse(String movie, double currentRate, int ratings) {
     }
 
-    public record TopRatedResponse(String movie, int year, double rate, double boxOffice) {
+    public record TopRatedResponse(String movie, int year, double rate, @NumberFormat(pattern = "#0.00") BigDecimal boxOffice) {
     }
 }

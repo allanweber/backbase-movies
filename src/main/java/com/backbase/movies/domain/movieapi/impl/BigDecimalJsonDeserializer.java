@@ -8,27 +8,29 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import java.io.IOException;
+import java.math.BigDecimal;
+import java.math.RoundingMode;
 
-public class DoubleJsonDeserializer extends StdDeserializer<Double> {
+public class BigDecimalJsonDeserializer extends StdDeserializer<BigDecimal> {
 
-    static Logger logger = LoggerFactory.getLogger(DoubleJsonDeserializer.class);
+    static Logger logger = LoggerFactory.getLogger(BigDecimalJsonDeserializer.class);
 
-    protected DoubleJsonDeserializer(Class<?> vc) {
+    protected BigDecimalJsonDeserializer(Class<?> vc) {
         super(vc);
     }
 
-    protected DoubleJsonDeserializer() {
+    protected BigDecimalJsonDeserializer() {
         this(null);
     }
 
     @Override
-    public Double deserialize(JsonParser jsonParser, DeserializationContext deserializationContext) throws IOException, JacksonException {
+    public BigDecimal deserialize(JsonParser jsonParser, DeserializationContext deserializationContext) throws IOException, JacksonException {
         String cleanedString = jsonParser.getText().replaceAll("[^0-9.]", "");
         try {
-            return Double.parseDouble(cleanedString);
+            return new BigDecimal(cleanedString).setScale(2, RoundingMode.HALF_UP);
         } catch (NumberFormatException e) {
             logger.error("Error parsing double value: {}", jsonParser.getText());
-            return 0.0;
+            return BigDecimal.ZERO;
         }
 
     }

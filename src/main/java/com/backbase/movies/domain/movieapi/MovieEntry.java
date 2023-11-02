@@ -1,10 +1,12 @@
 package com.backbase.movies.domain.movieapi;
 
-import com.backbase.movies.domain.movieapi.impl.DoubleJsonDeserializer;
+import com.backbase.movies.domain.movieapi.impl.BigDecimalJsonDeserializer;
 import com.backbase.movies.domain.movieapi.impl.IntegerJsonDeserializer;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
+
+import java.math.BigDecimal;
 
 @JsonIgnoreProperties(ignoreUnknown = true)
 public class MovieEntry {
@@ -16,8 +18,8 @@ public class MovieEntry {
     private int year;
 
     @JsonProperty("BoxOffice")
-    @JsonDeserialize(using = DoubleJsonDeserializer.class)
-    private double boxOffice;
+    @JsonDeserialize(using = BigDecimalJsonDeserializer.class)
+    private BigDecimal boxOffice;
 
     @JsonProperty("Response")
     private boolean response;
@@ -36,7 +38,7 @@ public class MovieEntry {
         return year;
     }
 
-    public double getBoxOffice() {
+    public BigDecimal getBoxOffice() {
         return boxOffice;
     }
 

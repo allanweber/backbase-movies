@@ -3,6 +3,7 @@ package com.backbase.movies.domain.movies.repository;
 import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.mapping.Document;
 
+import java.math.BigDecimal;
 import java.util.List;
 
 @Document(collection = "movies")
@@ -19,7 +20,7 @@ public class Movie {
 
     private List<Nominee> nominees;
 
-    private double boxOffice;
+    private BigDecimal boxOffice;
 
     public Movie() {
         this.rate = new MovieRate();
@@ -38,7 +39,7 @@ public class Movie {
     }
 
 
-    public Movie(String title, int year, double boxOffice) {
+    public Movie(String title, int year, BigDecimal boxOffice) {
         this();
         this.title = title;
         this.year = year;
@@ -61,11 +62,11 @@ public class Movie {
         return rate;
     }
 
-    public double getBoxOffice() {
+    public BigDecimal getBoxOffice() {
         return boxOffice;
     }
 
-    public void setBoxOffice(double boxOffice) {
+    public void setBoxOffice(BigDecimal boxOffice) {
         this.boxOffice = boxOffice;
     }
 }

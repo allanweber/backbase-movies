@@ -8,6 +8,8 @@ import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
 import org.springframework.web.client.HttpClientErrorException;
 
+import java.math.BigDecimal;
+import java.math.RoundingMode;
 import java.util.List;
 import java.util.Optional;
 
@@ -27,9 +29,9 @@ public class RatingService {
         Movie movie = movieRepository.getByTitle(movieTitle)
                 .orElseGet(() -> newMovieFromCollection(movieTitle));
 
-        if (movie.getBoxOffice() == 0) {
-            double boxOffice = retrieveBoxOffice(movieTitle);
-            movie.setBoxOffice(boxOffice);
+        if (movie.getBoxOffice() == null) {
+            BigDecimal boxOffice = retrieveBoxOffice(movieTitle);
+            movie.setBoxOffice(boxOffice.setScale(2, RoundingMode.HALF_UP));
         }
 
         movie.getRate().rate(rate);
@@ -37,15 +39,13 @@ public class RatingService {
     }
 
     public List<Movie> topRated(int limit) {
-        List<Movie> movies = movieRepository.topRated(limit);
-//        movies.sort((m1, m2) -> Double.compare(m2.getBoxOffice(), m1.getBoxOffice()));
-        return movies;
+        return movieRepository.topRated(limit);
     }
 
-    private double retrieveBoxOffice(String movieTitle) {
+    private BigDecimal retrieveBoxOffice(String movieTitle) {
         return searchInMovieCollection(movieTitle)
                 .map(MovieEntry::getBoxOffice)
-                .orElse(0.0);
+                .orElse(BigDecimal.ZERO);
     }
 
     private Movie newMovieFromCollection(String movieTitle) {
