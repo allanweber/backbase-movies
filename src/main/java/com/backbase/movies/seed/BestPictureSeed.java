@@ -21,9 +21,9 @@ public class BestPictureSeed {
         this.movieService = movieService;
     }
 
-    BestPictureParser parser;
 
     public void seed(List<SeedRecord> records) {
+        BestPictureParser parser;
         for (SeedRecord record : records) {
             parser = new BestPictureParser(record);
             int year = parser.getYear();

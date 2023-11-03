@@ -17,6 +17,7 @@ public class AuthenticationFilter extends GenericFilterBean {
     private final AuthenticationService authenticationService;
 
     public AuthenticationFilter(AuthenticationService authenticationService) {
+        super();
         this.authenticationService = authenticationService;
     }
 

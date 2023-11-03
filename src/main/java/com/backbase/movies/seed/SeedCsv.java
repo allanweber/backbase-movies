@@ -6,7 +6,9 @@ import org.apache.commons.csv.CSVParser;
 import org.apache.commons.csv.CSVRecord;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Component;
+import org.springframework.web.client.HttpClientErrorException;
 
 import java.io.IOException;
 import java.io.InputStream;
@@ -27,8 +29,10 @@ public class SeedCsv {
 
     public void seed() {
 
-        try (InputStream is = this.getClass().getClassLoader().getResourceAsStream("data/academy_awards.csv")) {
-            if (is == null) throw new RuntimeException("Cannot find resource file /data/academy_awards.csv");
+        try (InputStream is = Thread.currentThread().getContextClassLoader().getResourceAsStream("data/academy_awards.csv")) {
+            if (is == null) {
+                throw new HttpClientErrorException(HttpStatus.INTERNAL_SERVER_ERROR, "Cannot find resource file data/academy_awards.csv");
+            }
 
             CSVFormat csvFormat = CSVFormat.Builder.create().setHeader("Year", "Category", "Nominee", "Additional Info", "Won?").build();
             try (CSVParser csvParser = new CSVParser(new InputStreamReader(is, StandardCharsets.UTF_8), csvFormat)) {
@@ -43,7 +47,7 @@ public class SeedCsv {
                 bestPictureSeed.seed(records);
             }
         } catch (IOException e) {
-            throw new RuntimeException(e);
+            throw (HttpClientErrorException) new HttpClientErrorException(HttpStatus.INTERNAL_SERVER_ERROR, "Error seeding data").initCause(e);
         }
     }
 }

@@ -1,6 +1,6 @@
 package com.backbase.movies.seed;
 
-public abstract class SeedParser {
+public class SeedParser {
 
     protected final SeedRecord seedRecord;
 
@@ -18,7 +18,7 @@ public abstract class SeedParser {
     }
 
     protected boolean won() {
-        return seedRecord.won().equalsIgnoreCase("yes");
+        return "yes".equalsIgnoreCase(seedRecord.won());
     }
 
     protected String getAdditionalInfo() {

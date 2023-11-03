@@ -20,11 +20,11 @@ public class BestPictureController {
     }
 
     @GetMapping("/won")
-    ResponseEntity<WonResponse> wonByTitle(@RequestParam(value = "title") String title) {
+    public ResponseEntity<WonResponse> wonByTitle(@RequestParam String title) {
         boolean bestPicture = bestPictureService.wonBestPicture(title);
         return ok(new WonResponse(bestPicture));
     }
 
-    private record WonResponse(boolean won) {
+    public record WonResponse(boolean won) {
     }
 }

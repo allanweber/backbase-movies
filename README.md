@@ -38,5 +38,6 @@ MONGO
             <version>8.0.0.Final</version>
         </dependency>
 
-java -jar .\target\Movies-API-0.0.1.jar
-java -jar -DSEED_ENABLED=true .\target\Movies-API-0.0.1.jar
+<groupId>org.apache.maven.plugins</groupId>
+<artifactId>maven-pmd-plugin</artifactId>
+

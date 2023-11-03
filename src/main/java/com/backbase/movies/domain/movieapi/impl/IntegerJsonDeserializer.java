@@ -10,7 +10,7 @@ import java.io.IOException;
 
 public class IntegerJsonDeserializer extends StdDeserializer<Integer> {
 
-    static Logger logger = LoggerFactory.getLogger(IntegerJsonDeserializer.class);
+    private static Logger logger = LoggerFactory.getLogger(IntegerJsonDeserializer.class);
 
     protected IntegerJsonDeserializer(Class<?> vc) {
         super(vc);
@@ -22,14 +22,15 @@ public class IntegerJsonDeserializer extends StdDeserializer<Integer> {
 
     @Override
     public Integer deserialize(JsonParser jsonParser, DeserializationContext deserializationContext) throws IOException {
+        int year = 0;
         String regexPattern = "(\\d{4}).*";
         String cleanedString = jsonParser.getText().replaceFirst(regexPattern, "$1");
 
         try {
-            return Integer.parseInt(cleanedString);
+            year = Integer.parseInt(cleanedString);
         } catch (NumberFormatException e) {
             logger.error("Error parsing integer value: {}", jsonParser.getText());
-            return 0;
         }
+        return year;
     }
 }

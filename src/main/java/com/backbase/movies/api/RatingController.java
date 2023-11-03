@@ -1,6 +1,6 @@
 package com.backbase.movies.api;
 
-import com.backbase.movies.domain.movies.Helper;
+import com.backbase.movies.domain.movies.DoubleHelper;
 import com.backbase.movies.domain.movies.RatingService;
 import com.backbase.movies.domain.movies.repository.Movie;
 import jakarta.validation.Valid;
@@ -28,23 +28,24 @@ public class RatingController {
     }
 
     @PutMapping("/rate")
-    ResponseEntity<RateResponse> rate(@RequestParam(value = "title") String title, @RequestParam(value = "rate") @Valid @Positive @Max(value = 10) double rate) {
-        rate = Helper.precision(rate);
-        Movie movie = ratingService.rate(title, rate);
+    public ResponseEntity<RateResponse> rate(@RequestParam String title, @RequestParam @Valid @Positive @Max(10) double rate) {
+        double correctRate = DoubleHelper.precision(rate);
+        Movie movie = ratingService.rate(title, correctRate);
         RateResponse response = new RateResponse(movie.getTitle(), movie.getRate().getCurrentRate(), movie.getRate().getRatings().size());
         return ok(response);
     }
 
     @GetMapping("/top-rated")
-    ResponseEntity<List<TopRatedResponse>> topRated(@RequestParam(value = "limit", required = false, defaultValue = "10") int limit) {
+    public ResponseEntity<List<TopRatedResponse>> topRated(@RequestParam(required = false, defaultValue = "10") int limit) {
         List<Movie> movies = ratingService.topRated(limit);
         List<TopRatedResponse> top = movies.stream().map(movie -> new TopRatedResponse(movie.getTitle(), movie.getYear(), movie.getRate().getCurrentRate(), movie.getBoxOffice())).toList();
         return ok(top);
     }
 
-    private record RateResponse(String movie, double currentRate, int ratings) {
+    public record RateResponse(String movie, double currentRate, int ratings) {
     }
 
-    public record TopRatedResponse(String movie, int year, double rate, @NumberFormat(pattern = "#0.00") BigDecimal boxOffice) {
+    public record TopRatedResponse(String movie, int year, double rate,
+                                   @NumberFormat(pattern = "#0.00") BigDecimal boxOffice) {
     }
 }

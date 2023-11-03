@@ -14,7 +14,6 @@ import java.net.URLEncoder;
 import java.nio.charset.StandardCharsets;
 import java.util.Optional;
 
-import static java.util.Optional.empty;
 import static java.util.Optional.of;
 
 @Service
@@ -41,10 +40,10 @@ public class OmdbMovieApi implements MovieCollectionApi {
         ResponseEntity<MovieEntry> response = restTemplate.getForEntity(url, MovieEntry.class);
         log.info("Response from OMDB: {}", response);
 
+        Optional<MovieEntry> movie = Optional.empty();
         if (response.getBody() != null && response.getBody().isResponse()) {
-            return of(response.getBody());
+            movie = of(response.getBody());
         }
-
-        return empty();
+        return movie;
     }
 }

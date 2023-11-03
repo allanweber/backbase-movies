@@ -12,7 +12,7 @@ import java.math.RoundingMode;
 
 public class BigDecimalJsonDeserializer extends StdDeserializer<BigDecimal> {
 
-    static Logger logger = LoggerFactory.getLogger(BigDecimalJsonDeserializer.class);
+    private static Logger logger = LoggerFactory.getLogger(BigDecimalJsonDeserializer.class);
 
     protected BigDecimalJsonDeserializer(Class<?> vc) {
         super(vc);
@@ -24,13 +24,13 @@ public class BigDecimalJsonDeserializer extends StdDeserializer<BigDecimal> {
 
     @Override
     public BigDecimal deserialize(JsonParser jsonParser, DeserializationContext deserializationContext) throws IOException {
+        BigDecimal bigDecimal = BigDecimal.ZERO;
         String cleanedString = jsonParser.getText().replaceAll("[^0-9.]", "");
         try {
-            return new BigDecimal(cleanedString).setScale(2, RoundingMode.HALF_UP);
+            bigDecimal =  new BigDecimal(cleanedString).setScale(2, RoundingMode.HALF_UP);
         } catch (NumberFormatException e) {
             logger.error("Error parsing double value: {}", jsonParser.getText());
-            return BigDecimal.ZERO;
         }
-
+        return bigDecimal;
     }
 }
