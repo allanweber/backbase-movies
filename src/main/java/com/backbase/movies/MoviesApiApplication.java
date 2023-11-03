@@ -2,15 +2,13 @@ package com.backbase.movies;
 
 import com.backbase.movies.seed.SeedConfiguration;
 import com.backbase.movies.seed.SeedCsv;
-import org.springframework.beans.factory.annotation.Value;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
+import org.springframework.boot.autoconfigure.security.servlet.UserDetailsServiceAutoConfiguration;
 import org.springframework.context.annotation.Bean;
 
-import java.util.Arrays;
-
-@SpringBootApplication
+@SpringBootApplication(exclude = {UserDetailsServiceAutoConfiguration.class})
 public class MoviesApiApplication {
 
     public static void main(String[] args) {
@@ -18,9 +16,9 @@ public class MoviesApiApplication {
     }
 
     @Bean
-    CommandLineRunner runner(SeedConfiguration seedConfiguration, SeedCsv seedCsv){
+    CommandLineRunner runner(SeedConfiguration seedConfiguration, SeedCsv seedCsv) {
         return args -> {
-            if(seedConfiguration.isEnabled()) {
+            if (seedConfiguration.isEnabled()) {
                 seedCsv.seed();
             } else {
                 System.out.println("Not seeding database");

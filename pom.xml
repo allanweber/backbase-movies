@@ -9,8 +9,8 @@
 		<relativePath/>
 	</parent>
 	<groupId>com.backbase</groupId>
-	<artifactId>Movies-API</artifactId>
-	<version>0.0.1</version>
+	<artifactId>movies_api</artifactId>
+	<version>1.0.0</version>
 	<name>Movies-API</name>
 	<description>Movies API</description>
 	<properties>
