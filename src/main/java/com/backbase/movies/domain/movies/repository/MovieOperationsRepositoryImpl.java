@@ -26,7 +26,9 @@ class MovieOperationsRepositoryImpl implements MovieOperationsRepository {
 
     @Override
     public boolean wonBestPicture(String movieTitle) {
-        Query query = new Query(Criteria.where("title").is(movieTitle).and("nominees.category").is("BEST_PICTURE").and("nominees.won").is(true));
+        Query query = new Query(Criteria.where("title").is(movieTitle)
+                .and("nominees.category").is("BEST_PICTURE")
+                .and("nominees.won").is(true));
         Movie one = mongoOperations.findOne(query, Movie.class);
         return one != null;
     }

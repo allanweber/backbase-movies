@@ -4,6 +4,7 @@ import com.backbase.movies.domain.movies.Helper;
 import com.backbase.movies.domain.movies.RatingService;
 import com.backbase.movies.domain.movies.repository.Movie;
 import jakarta.validation.Valid;
+import jakarta.validation.constraints.Max;
 import jakarta.validation.constraints.Positive;
 import org.springframework.format.annotation.NumberFormat;
 import org.springframework.http.ResponseEntity;
@@ -27,8 +28,8 @@ public class RatingController {
     }
 
     @PutMapping("/rate")
-    ResponseEntity<RateResponse> rate(@RequestParam(value = "title") String title, @RequestParam(value = "rate") @Valid @Positive double rate) {
-        rate = Helper.doublePrecision(rate);
+    ResponseEntity<RateResponse> rate(@RequestParam(value = "title") String title, @RequestParam(value = "rate") @Valid @Positive @Max(value = 10) double rate) {
+        rate = Helper.precision(rate);
         Movie movie = ratingService.rate(title, rate);
         RateResponse response = new RateResponse(movie.getTitle(), movie.getRate().getCurrentRate(), movie.getRate().getRatings().size());
         return ok(response);

@@ -5,7 +5,7 @@ import java.math.RoundingMode;
 
 public class Helper {
 
-    public static double doublePrecision(double value) {
+    public static double precision(double value) {
         BigDecimal bd = new BigDecimal(value).setScale(1, RoundingMode.HALF_UP);
         return bd.doubleValue();
     }

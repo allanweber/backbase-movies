@@ -11,11 +11,17 @@ public class MovieRate {
     private double currentRate = 0.0;
 
     public void rate(double rating) {
+        if (rating < 0) {
+            rating = 0;
+        }
+        if (rating > 10) {
+            rating = 10;
+        }
         if (ratings == null) {
             ratings = new ArrayList<>();
         }
         ratings.add(rating);
-        currentRate = Helper.doublePrecision(ratings.stream().mapToDouble(Double::doubleValue).average().orElse(0.0));
+        currentRate = Helper.precision(ratings.stream().mapToDouble(Double::doubleValue).average().orElse(0.0));
     }
 
     public List<Double> getRatings() {

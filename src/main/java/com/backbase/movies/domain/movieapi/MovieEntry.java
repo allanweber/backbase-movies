@@ -30,6 +30,12 @@ public class MovieEntry {
     public MovieEntry() {
     }
 
+    public MovieEntry(String title, int year, BigDecimal boxOffice) {
+        this.title = title;
+        this.year = year;
+        this.boxOffice = boxOffice;
+    }
+
     public String getTitle() {
         return title;
     }
