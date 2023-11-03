@@ -21,11 +21,8 @@ public class OmdbMovieApi implements MovieCollectionApi {
 
     private final RestTemplate restTemplate;
 
-    public OmdbMovieApi() {
-        this.restTemplate = new RestTemplate();
-        DefaultUriBuilderFactory defaultUriBuilderFactory = new DefaultUriBuilderFactory();
-        defaultUriBuilderFactory.setEncodingMode(DefaultUriBuilderFactory.EncodingMode.NONE);
-        this.restTemplate.setUriTemplateHandler(defaultUriBuilderFactory);
+    public OmdbMovieApi(RestTemplate restTemplate) {
+        this.restTemplate = restTemplate;
     }
 
     @Override

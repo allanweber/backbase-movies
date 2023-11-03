@@ -1,6 +1,5 @@
 package com.backbase.movies.domain.movieapi.impl;
 
-import com.fasterxml.jackson.core.JacksonException;
 import com.fasterxml.jackson.core.JsonParser;
 import com.fasterxml.jackson.databind.DeserializationContext;
 import com.fasterxml.jackson.databind.deser.std.StdDeserializer;
@@ -24,7 +23,7 @@ public class BigDecimalJsonDeserializer extends StdDeserializer<BigDecimal> {
     }
 
     @Override
-    public BigDecimal deserialize(JsonParser jsonParser, DeserializationContext deserializationContext) throws IOException, JacksonException {
+    public BigDecimal deserialize(JsonParser jsonParser, DeserializationContext deserializationContext) throws IOException {
         String cleanedString = jsonParser.getText().replaceAll("[^0-9.]", "");
         try {
             return new BigDecimal(cleanedString).setScale(2, RoundingMode.HALF_UP);

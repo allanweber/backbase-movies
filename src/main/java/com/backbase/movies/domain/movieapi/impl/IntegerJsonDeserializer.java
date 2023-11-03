@@ -1,6 +1,5 @@
 package com.backbase.movies.domain.movieapi.impl;
 
-import com.fasterxml.jackson.core.JacksonException;
 import com.fasterxml.jackson.core.JsonParser;
 import com.fasterxml.jackson.databind.DeserializationContext;
 import com.fasterxml.jackson.databind.deser.std.StdDeserializer;
@@ -22,7 +21,7 @@ public class IntegerJsonDeserializer extends StdDeserializer<Integer> {
     }
 
     @Override
-    public Integer deserialize(JsonParser jsonParser, DeserializationContext deserializationContext) throws IOException, JacksonException {
+    public Integer deserialize(JsonParser jsonParser, DeserializationContext deserializationContext) throws IOException {
         String regexPattern = "(\\d{4}).*";
         String cleanedString = jsonParser.getText().replaceFirst(regexPattern, "$1");
 

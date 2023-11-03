@@ -36,6 +36,13 @@ public class MovieEntry {
         this.boxOffice = boxOffice;
     }
 
+    public MovieEntry(String title, int year, BigDecimal boxOffice, boolean response) {
+        this.title = title;
+        this.year = year;
+        this.boxOffice = boxOffice;
+        this.response = response;
+    }
+
     public String getTitle() {
         return title;
     }
