@@ -9,9 +9,8 @@ import org.springframework.stereotype.Component;
 import java.util.List;
 
 @Component
-public class BestPictureSeed extends SeedParser {
+public class BestPictureSeed {
 
-    private static final List<String> NOT_A_MOVIE = List.of("Feature Productions", "Fox", "Metro-Goldwyn-Mayer", "Paramount Famous Lasky", "The Caddo Company");
 
     private final MovieService movieService;
 
@@ -19,23 +18,18 @@ public class BestPictureSeed extends SeedParser {
         this.movieService = movieService;
     }
 
+    BestPictureParser parser;
+
     public void seed(List<SeedRecord> records) {
         for (SeedRecord record : records) {
-            parse(record);
-            int year = getYear();
-            String movieTitle = getMovieTitle();
+            parser = new BestPictureParser(record);
+
+            int year = parser.getYear();
+            String movieTitle = parser.getMovieTitle();
             Movie movie = movieService.getOrCreateMovie(new Movie(movieTitle, year));
-            movieService.addNominee(movie.getId(), new Nominee(Category.BEST_PICTURE, getAdditionalInfo(), won()));
+            movieService.addNominee(movie.getId(), new Nominee(Category.BEST_PICTURE, parser.getAdditionalInfo(), parser.won()));
         }
     }
 
-    @Override
-    protected String getMovieTitle() {
-        String movieTitle = super.getMovieTitle();
-        if (NOT_A_MOVIE.contains(movieTitle)) {
-            movieTitle = getAdditionalInfo();
-        }
-        return movieTitle;
-    }
 
 }

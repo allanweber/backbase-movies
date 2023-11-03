@@ -15,4 +15,16 @@ public class Nominee {
 
     public Nominee() {
     }
+
+    public Category getCategory() {
+        return category;
+    }
+
+    public String getNominee() {
+        return nominee;
+    }
+
+    public boolean isWon() {
+        return won;
+    }
 }

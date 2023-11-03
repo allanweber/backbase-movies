@@ -1,27 +1,19 @@
 package com.backbase.movies.seed;
 
-import java.util.regex.Pattern;
-
 public abstract class SeedParser {
 
-    private static final Pattern YEAR_PATTERN = Pattern.compile("(\\d{4})");
+    protected final SeedRecord seedRecord;
 
-    private SeedRecord seedRecord;
-
-    public void parse(SeedRecord seedRecord) {
+    public SeedParser(SeedRecord seedRecord) {
         this.seedRecord = seedRecord;
     }
 
     protected int getYear() {
-        return YEAR_PATTERN.matcher(seedRecord.year())
-                .results()
-                .map(mr -> mr.group(1))
-                .map(Integer::parseInt)
-                .findFirst()
-                .orElseThrow(() -> new RuntimeException("Cannot parse year from " + seedRecord.year()));
+        String yearString = seedRecord.year().replaceFirst("^(\\d{4}).*", "$1");
+        return Integer.parseInt(yearString);
     }
 
-    protected String getMovieTitle(){
+    protected String getMovieTitle() {
         return seedRecord.nominee().trim();
     }
 
@@ -29,7 +21,7 @@ public abstract class SeedParser {
         return seedRecord.won().equalsIgnoreCase("yes");
     }
 
-    protected String getAdditionalInfo(){
+    protected String getAdditionalInfo() {
         return seedRecord.additionalInfo();
     }
 }
