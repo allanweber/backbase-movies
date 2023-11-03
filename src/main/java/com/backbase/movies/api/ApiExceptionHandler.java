@@ -7,7 +7,6 @@ import org.springframework.web.bind.annotation.RestControllerAdvice;
 import org.springframework.web.client.HttpClientErrorException;
 
 import java.util.Map;
-import java.util.Optional;
 import java.util.concurrent.ConcurrentHashMap;
 
 import static java.util.Optional.ofNullable;
@@ -36,7 +35,6 @@ public class ApiExceptionHandler {
     }
 
     private Map<String, String> extractMessage(Exception exception) {
-
         final Map<String, String> errors = new ConcurrentHashMap<>();
         errors.put("error", ofNullable(exception.getCause()).map(Throwable::getMessage).orElse(exception.getMessage()));
         return errors;
