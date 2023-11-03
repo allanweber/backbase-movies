@@ -62,4 +62,15 @@ public class MovieEntry {
     public String getError() {
         return error;
     }
+
+    @Override
+    public String toString() {
+        return "MovieEntry{" +
+                "title='" + title + '\'' +
+                ", year=" + year +
+                ", boxOffice=" + boxOffice +
+                ", response=" + response +
+                ", error='" + error + '\'' +
+                '}';
+    }
 }
