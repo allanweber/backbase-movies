@@ -26,6 +26,6 @@ public class MongoDbTestContainerInitializer implements ApplicationContextInitia
                 format("spring.data.mongodb.port=%s", container.getMappedPort(27017)));
 
         TestPropertySourceUtils.addInlinedPropertiesToEnvironment(configurableApplicationContext,
-                "spring.data.mongodb.database=movies");
+                "spring.data.mongodb.database=movies_test");
     }
 }

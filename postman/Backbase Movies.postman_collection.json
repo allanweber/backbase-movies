@@ -1,0 +1,452 @@
+{
+	"info": {
+		"_postman_id": "09541de5-12cf-4d07-ac7d-60050482fe17",
+		"name": "Backbase Movies",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "9011736"
+	},
+	"item": [
+		{
+			"name": "Health",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Status code is 200\", function () {\r",
+							"  pm.response.to.have.status(200);\r",
+							"});\r",
+							"\r",
+							"pm.test(\"Test response\", () => {\r",
+							"    const response = pm.response.json();\r",
+							"\r",
+							"\tpm.expect(response.status).to.eql(\"UP\");\r",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "{{api}}/health",
+					"host": [
+						"{{api}}"
+					],
+					"path": [
+						"health"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Readiness",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Status code is 200\", function () {\r",
+							"  pm.response.to.have.status(200);\r",
+							"});\r",
+							"\r",
+							"pm.test(\"Test response\", () => {\r",
+							"    const response = pm.response.json();\r",
+							"\r",
+							"\tpm.expect(response.status).to.eql(\"UP\");\r",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "X-API-KEY",
+						"value": "3307cf63",
+						"type": "text"
+					}
+				],
+				"url": {
+					"raw": "{{api}}/health/readiness",
+					"host": [
+						"{{api}}"
+					],
+					"path": [
+						"health",
+						"readiness"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Won Best Picture by Movie Title",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Status code is 200\", function () {\r",
+							"  pm.response.to.have.status(200);\r",
+							"});\r",
+							"\r",
+							"pm.test(\"Test response\", () => {\r",
+							"    const response = pm.response.json();\r",
+							"\r",
+							"\tpm.expect(response.won).to.eql(true);\r",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "X-API-KEY",
+						"value": "3307cf63",
+						"type": "text"
+					}
+				],
+				"url": {
+					"raw": "{{api}}/v1/movies/best-picture/won?title=Slumdog%20Millionaire",
+					"host": [
+						"{{api}}"
+					],
+					"path": [
+						"v1",
+						"movies",
+						"best-picture",
+						"won"
+					],
+					"query": [
+						{
+							"key": "title",
+							"value": "Slumdog%20Millionaire"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Did not win Best Picture by Movie Title",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Status code is 200\", function () {\r",
+							"  pm.response.to.have.status(200);\r",
+							"});\r",
+							"\r",
+							"pm.test(\"Test response\", () => {\r",
+							"    const response = pm.response.json();\r",
+							"\r",
+							"\tpm.expect(response.won).to.eql(false);\r",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "X-API-KEY",
+						"value": "3307cf63",
+						"type": "text"
+					}
+				],
+				"url": {
+					"raw": "{{api}}/v1/movies/best-picture/won?title=There%20Will%20Be%20Blood",
+					"host": [
+						"{{api}}"
+					],
+					"path": [
+						"v1",
+						"movies",
+						"best-picture",
+						"won"
+					],
+					"query": [
+						{
+							"key": "title",
+							"value": "There%20Will%20Be%20Blood"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Rate a movie",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Status code is 200\", function () {\r",
+							"  pm.response.to.have.status(200);\r",
+							"});\r",
+							"\r",
+							"pm.test(\"Test response\", () => {\r",
+							"    const response = pm.response.json();\r",
+							"\r",
+							"\tpm.expect(response.movie).to.eql(\"The Avengers\");\r",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "PUT",
+				"header": [
+					{
+						"key": "X-API-KEY",
+						"value": "3307cf63",
+						"type": "text"
+					}
+				],
+				"url": {
+					"raw": "{{api}}/v1/movies/ratings/rate?title=Avengers&rate=10",
+					"host": [
+						"{{api}}"
+					],
+					"path": [
+						"v1",
+						"movies",
+						"ratings",
+						"rate"
+					],
+					"query": [
+						{
+							"key": "title",
+							"value": "Avengers"
+						},
+						{
+							"key": "rate",
+							"value": "10"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Rate a movie that does not exist",
+			"request": {
+				"method": "PUT",
+				"header": [
+					{
+						"key": "X-API-KEY",
+						"value": "3307cf63",
+						"type": "text"
+					}
+				],
+				"url": {
+					"raw": "{{api}}/v1/movies/ratings/rate?title=xxxxxxxxxx&rate=9",
+					"host": [
+						"{{api}}"
+					],
+					"path": [
+						"v1",
+						"movies",
+						"ratings",
+						"rate"
+					],
+					"query": [
+						{
+							"key": "title",
+							"value": "xxxxxxxxxx"
+						},
+						{
+							"key": "rate",
+							"value": "9"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Rate a bunch of movies",
+			"event": [
+				{
+					"listen": "prerequest",
+					"script": {
+						"exec": [
+							"let movies = pm.collectionVariables.get(\"movies\");\r",
+							"\r",
+							"if(!movies || movies.length == 0) {\r",
+							"    movies = [\"Black Swan\", \"The Fighter\",  \"Inception\", \"The Kids Are All Right\", \"127 Hours\", \"The Social Network\", \"Toy Story 3\", \"Avatar\", \"Rambo\", \"Mad Max\", \r",
+							"\t\"True Grit\",  \"Winter's Bone\", \"The Blind Side\", \"Bad Boys for Life\", \"Birds of Prey\"\r",
+							"\t];\r",
+							"}\r",
+							"\r",
+							"let movie = movies.shift();\r",
+							"console.log(movie)\r",
+							"\r",
+							"pm.collectionVariables.set(\"movie\", movie);\r",
+							"pm.collectionVariables.set(\"rate\", _.random(1, 10, true).toFixed(2));\r",
+							"\r",
+							"pm.collectionVariables.set(\"movies\", movies);"
+						],
+						"type": "text/javascript"
+					}
+				},
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"const movies = pm.collectionVariables.get(\"movies\");\r",
+							"\r",
+							"if (movies && movies.length > 0){\r",
+							"    postman.setNextRequest(\"Rate a bunch of movies\");\r",
+							"} else {\r",
+							"    postman.setNextRequest(null);\r",
+							"}\r",
+							"\r",
+							"pm.test(\"Status code is 200\", function () {\r",
+							"    pm.response.to.have.status(200);\r",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "PUT",
+				"header": [
+					{
+						"key": "X-API-KEY",
+						"value": "3307cf63",
+						"type": "text"
+					}
+				],
+				"url": {
+					"raw": "{{api}}/v1/movies/ratings/rate?title={{movie}}&rate={{rate}}",
+					"host": [
+						"{{api}}"
+					],
+					"path": [
+						"v1",
+						"movies",
+						"ratings",
+						"rate"
+					],
+					"query": [
+						{
+							"key": "title",
+							"value": "{{movie}}"
+						},
+						{
+							"key": "rate",
+							"value": "{{rate}}"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Get Top Rated Movies",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Status code is 200\", function () {\r",
+							"  pm.response.to.have.status(200);\r",
+							"});\r",
+							"\r",
+							"pm.test(\"Test response\", () => {\r",
+							"    const response = pm.response.json();\r",
+							"\r",
+							"\tpm.expect(response.length).to.eql(10);\r",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "X-API-KEY",
+						"value": "3307cf63",
+						"type": "text"
+					}
+				],
+				"url": {
+					"raw": "{{api}}/v1/movies/ratings/top-rated?limit=10",
+					"host": [
+						"{{api}}"
+					],
+					"path": [
+						"v1",
+						"movies",
+						"ratings",
+						"top-rated"
+					],
+					"query": [
+						{
+							"key": "limit",
+							"value": "10"
+						}
+					]
+				}
+			},
+			"response": []
+		}
+	],
+	"event": [
+		{
+			"listen": "prerequest",
+			"script": {
+				"type": "text/javascript",
+				"exec": [
+					""
+				]
+			}
+		},
+		{
+			"listen": "test",
+			"script": {
+				"type": "text/javascript",
+				"exec": [
+					""
+				]
+			}
+		}
+	],
+	"variable": [
+		{
+			"key": "api",
+			"value": "http://localhost:8080",
+			"type": "string"
+		},
+		{
+			"key": "movie",
+			"value": ""
+		},
+		{
+			"key": "rate",
+			"value": ""
+		},
+		{
+			"key": "movies",
+			"value": ""
+		}
+	]
+}
