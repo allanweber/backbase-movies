@@ -59,7 +59,7 @@ class RatingServiceTest {
         String movieTitle = "The Godfather";
         double rate = 10.0;
 
-        when(movieRepository.getByTitle(movieTitle)).thenReturn(of(new Movie(movieTitle, 1972, null)));
+        when(movieRepository.getByTitle(movieTitle)).thenReturn(of(new Movie(movieTitle, 1972)));
         when(movieCollectionApi.searchMovie(movieTitle)).thenReturn(of(new MovieEntry(movieTitle, 1972, BigDecimal.valueOf(1000))));
         when(movieRepository.save(any(Movie.class))).thenAnswer(invocation -> invocation.getArgument(0));
 
@@ -102,7 +102,7 @@ class RatingServiceTest {
 
         assertEquals("Movie The Godfather not found", exception.getStatusText());
         assertEquals(HttpStatus.BAD_REQUEST, exception.getStatusCode());
-            verify(movieRepository, never()).save(any(Movie.class));
+        verify(movieRepository, never()).save(any(Movie.class));
     }
 
     @DisplayName("Get top rated movies")

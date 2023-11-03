@@ -1,4 +1,4 @@
-package com.backbase.movies;
+package com.backbase.movies.test_tools;
 
 import org.jetbrains.annotations.NotNull;
 import org.springframework.context.ApplicationContextInitializer;

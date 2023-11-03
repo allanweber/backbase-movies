@@ -46,6 +46,13 @@ public class Movie {
         this.boxOffice = boxOffice;
     }
 
+    public Movie(String title, int year, List<Nominee> nominees) {
+        this();
+        this.title = title;
+        this.year = year;
+        this.nominees = nominees;
+    }
+
     public String getId() {
         return id;
     }
@@ -68,5 +75,9 @@ public class Movie {
 
     public void setBoxOffice(BigDecimal boxOffice) {
         this.boxOffice = boxOffice;
+    }
+
+    public List<Nominee> getNominees() {
+        return nominees;
     }
 }
