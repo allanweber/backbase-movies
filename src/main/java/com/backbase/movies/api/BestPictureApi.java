@@ -20,9 +20,7 @@ public interface BestPictureApi {
             description = "Returns true if the movie won the Best Picture award")
     @ApiResponses(value = {
             @ApiResponse(responseCode = "200", description = "successful operation",
-                    content = @Content(schema = @Schema(implementation = BestPictureController.WonResponse.class))),
-            @ApiResponse(responseCode = "400", content = @Content(schema = @Schema())),
-            @ApiResponse(responseCode = "401", description = "Unauthorized", content = @Content(schema = @Schema())),
+                    content = @Content(schema = @Schema(implementation = BestPictureController.WonResponse.class)))
     })
     @GetMapping("/won")
     ResponseEntity<BestPictureController.WonResponse> wonByTitle(@RequestParam String title);

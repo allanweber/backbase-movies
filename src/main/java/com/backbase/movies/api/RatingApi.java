@@ -26,9 +26,7 @@ public interface RatingApi {
             description = "Returns the movie title, current rate and number of ratings")
     @ApiResponses(value = {
             @ApiResponse(responseCode = "200", description = "successful operation",
-                    content = @Content(schema = @Schema(implementation = RatingController.RateResponse.class))),
-            @ApiResponse(responseCode = "400", content = @Content(schema = @Schema())),
-            @ApiResponse(responseCode = "401", description = "Unauthorized", content = @Content(schema = @Schema())),
+                    content = @Content(schema = @Schema(implementation = RatingController.RateResponse.class)))
     })
     @PutMapping("/rate")
     ResponseEntity<RatingController.RateResponse> rate(@RequestParam String title, @RequestParam @Valid @Positive @Max(10) double rate);
@@ -39,8 +37,6 @@ public interface RatingApi {
     @ApiResponses(value = {
             @ApiResponse(responseCode = "200", description = "successful operation",
                     content = @Content(schema = @Schema(implementation = RatingController.RateResponse.class))),
-            @ApiResponse(responseCode = "400", content = @Content(schema = @Schema())),
-            @ApiResponse(responseCode = "401", description = "Unauthorized", content = @Content(schema = @Schema())),
     })
     @GetMapping("/top-rated")
     ResponseEntity<List<RatingController.TopRatedResponse>> topRated(@RequestParam(required = false, defaultValue = "10") int limit);
