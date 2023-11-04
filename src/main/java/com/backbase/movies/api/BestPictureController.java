@@ -2,16 +2,12 @@ package com.backbase.movies.api;
 
 import com.backbase.movies.domain.movies.BestPictureService;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import static org.springframework.http.ResponseEntity.ok;
 
-@RequestMapping("/v1/movies/best-picture")
 @RestController
-public class BestPictureController {
+public class BestPictureController implements BestPictureApi {
 
     private final BestPictureService bestPictureService;
 
@@ -19,8 +15,8 @@ public class BestPictureController {
         this.bestPictureService = bestPictureService;
     }
 
-    @GetMapping("/won")
-    public ResponseEntity<WonResponse> wonByTitle(@RequestParam String title) {
+    @Override
+    public ResponseEntity<WonResponse> wonByTitle(String title) {
         boolean bestPicture = bestPictureService.wonBestPicture(title);
         return ok(new WonResponse(bestPicture));
     }

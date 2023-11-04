@@ -43,7 +43,12 @@ public class SecurityConfiguration {
     }
 
     private String[] getPublicPath() {
-        String[] paths = {"/health/**"};
+        String[] paths = {"/health/**",
+                "/api/v1/auth/**",
+                "/v3/api-docs/**",
+                "/v3/api-docs.yaml",
+                "/swagger-ui/**",
+                "/swagger-ui.html"};
         return Stream.of(paths).toArray(String[]::new);
     }
 }
