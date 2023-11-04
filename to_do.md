@@ -1,0 +1,12 @@
+# Things I would implement if I had more time
+
+* As mentioned the API key is static and naive, I would implement a API key generation and validation. User would be able to generate a key and use it to access the API. Register via email and get 1 or more keys depending on the plan (free, paid, etc).
+* I would implement a cache layer to avoid querying the database API every time a movie is searched. I would use Redis for this. Maybe a TTL of 1 day. I would also implement a cache invalidation strategy, maybe a cron job to invalidate the cache every day at midnight. Keeping the top X most searched movies in the cache.
+* I would implement a rate limit strategy, maybe using Redis as well. I would limit the number of requests per API key per day. I would also implement a cron job to reset the limit every day at midnight.
+* The limit rate would be in the Gateway layer, so it would be transparent to the API. In that case a Gateway would be needed, maybe Zuul or Spring Cloud Gateway (I know this one better).
+* I would implement a circuit breaker strategy, maybe using Resilience4j. I would use it to avoid the API to be down if the OMDB API is down. I would also implement a fallback strategy, maybe using a cache layer.
+* I batch process to load the data from the csv file, instead of loading it on startup. Also at the batch time retrieve the box office value from the OMDB API and store it in the database, instead of searching for it every time the top-rated movies endpoint is called and the box office value is needed.
+* I would implement a better way to search for the movie, maybe using the movie id instead of the title. I would also implement a way to search for a movie by title and year, since there are many movies with the same title.
+* I strong way to search for the movie by title would be to use a search engine like ElasticSearch, but I think it is overkill for this project.
+* I don't think a relational database would be a good fit for this project, but I would implement a relational database version of this project using Postgres or MySQL.
+* Maybe the relational database is a fit for the user management, so I would implement a user management module using a relational database, signup, login, forgot password, etc, and most important, generate and validate API keys.
