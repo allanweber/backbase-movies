@@ -18,6 +18,7 @@ I decided to not implement a API KEY generation, instead I am using a valid OMDB
 * A endpoint to check if a movie ever won a best picture award, queried by movie title.
 * A start-up process that loads the movies data from a csv file into a mongo database.
 * I extended the MongoRepository to implement custom methods to query or aggregate the data, so I don't need to pollute the service layer with database queries. [MovieOperationsRepository](./src/main/java/com/backbase/movies/domain/movies/repository/MovieOperationsRepository.java) and [MovieOperationsRepositoryImpl](./src/main/java/com/backbase/movies/domain/movies/repository/MovieOperationsRepositoryImpl.java)
+* For the seed data process I used the CommandLineRunner interface, and I created a [SeedCsv](./src/main/java/com/backbase/movies/seed/SeedCsv.java) lading only the Best Picture data so far.
 
 ## Main Dependencies
 
