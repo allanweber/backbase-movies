@@ -80,4 +80,8 @@ public class Movie {
     public List<Nominee> getNominees() {
         return nominees;
     }
+
+    public void rateMovie(double rating) {
+        rate.rate(rating);
+    }
 }

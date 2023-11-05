@@ -14,7 +14,7 @@ public class MovieRate {
 
     private double currentRate;
 
-    public void rate(double rating) {
+    protected void rate(double rating) {
         double rate = rating;
         if (rate < MIN_RATING) {
             rate = 0;

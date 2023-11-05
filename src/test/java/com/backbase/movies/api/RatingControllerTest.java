@@ -67,23 +67,23 @@ class RatingControllerTest {
     @Test
     void topRated() {
         Movie movie = new Movie("The Godfather", 2020, BigDecimal.valueOf(100));
-        movie.getRate().rate(10);
+        movie.rateMovie(10);
         movieRepository.save(movie);
 
         movie = new Movie("Rambo", 2020, BigDecimal.valueOf(200));
-        movie.getRate().rate(2);
+        movie.rateMovie(2);
         movieRepository.save(movie);
 
         movie = new Movie("Avatar", 2020, BigDecimal.valueOf(300));
-        movie.getRate().rate(1);
+        movie.rateMovie(1);
         movieRepository.save(movie);
 
         movie = new Movie("Matrix", 2020, BigDecimal.valueOf(150));
-        movie.getRate().rate(8);
+        movie.rateMovie(8);
         movieRepository.save(movie);
 
         movie = new Movie("It", 2020, BigDecimal.valueOf(250));
-        movie.getRate().rate(7);
+        movie.rateMovie(7);
         movieRepository.save(movie);
 
         webTestClient
@@ -130,9 +130,9 @@ class RatingControllerTest {
     @Test
     void averageRate() {
         Movie movie = new Movie("The Godfather", 2020, BigDecimal.valueOf(100));
-        movie.getRate().rate(10);
-        movie.getRate().rate(9);
-        movie.getRate().rate(8);
+        movie.rateMovie(10);
+        movie.rateMovie(9);
+        movie.rateMovie(8);
         movieRepository.save(movie);
 
         webTestClient

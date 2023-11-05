@@ -19,6 +19,7 @@
         <exclude name="DataClass"/>
         <exclude name="UseUtilityClass"/>
         <exclude name="LawOfDemeter"/>
+        <exclude name="LoosePackageCoupling"/>
     </rule>
     <rule ref="category/java/documentation.xml">
         <exclude name="UncommentedEmptyConstructor"/>

@@ -9,7 +9,7 @@
 * Java 17
 * Maven 3+
 * Docker
-* Mongo: `docker run -p 27017:27017 --name movies -d mongo`
+* Mongo: `docker run -d -p 27017:27017 --name movies -d mongo`
 
 ## Environment Variables
 * MONGO_HOST: host name, and port if applicable (other than default localhost:27017)

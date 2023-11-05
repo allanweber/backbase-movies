@@ -34,7 +34,7 @@ public class RatingService {
             movie.setBoxOffice(boxOffice.setScale(2, RoundingMode.HALF_UP));
         }
 
-        movie.getRate().rate(rate);
+        movie.rateMovie(rate);
         return movieRepository.save(movie);
     }
 
